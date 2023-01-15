@@ -2,19 +2,25 @@ package main
 
 import (
 	"context"
+	"flag"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
+	"strconv"
 	"syscall"
 	"time"
 )
 
 func main() {
 
-	addrPort := ":6969"
-	directory := "."
-	delegate := http.FileServer(http.Dir(directory))
+	port := flag.Int("port", 6969, "the port to listen on")
+	directory := flag.String("dir", ".", "the root dir to serve")
+
+	flag.Parse()
+
+	addrPort := ":" + strconv.Itoa(*port)
+	delegate := http.FileServer(http.Dir(*directory))
 
 	// create a new serve mux and register the handlers
 	sm := http.NewServeMux()
