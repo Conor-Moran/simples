@@ -14,8 +14,8 @@ import (
 
 func main() {
 
-	port := flag.Int("port", 6969, "the port to listen on")
-	directory := flag.String("dir", ".", "the root dir to serve")
+	port := flag.Int("p", 6969, "the port to listen on")
+	directory := flag.String("d", ".", "the root dir to serve")
 
 	flag.Parse()
 
